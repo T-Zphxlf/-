@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- Enable IME instruction -->
+    <PreferenceCategory app:title="@string/pref_category_about">
+
+        <Preference
+            app:key="pref_enable_ime"
+            app:title="启用输入法"
+            app:summary="点击此处前往系统设置启用轻语输入法"
+            app:iconSpaceReserved="false" />
+
+        <Preference
+            app:key="pref_about"
+            app:title="@string/pref_about_title"
+            app:summary=""
+            app:iconSpaceReserved="false" />
+
+    </PreferenceCategory>
+
+    <!-- Voice Settings -->
+    <PreferenceCategory app:title="@string/pref_category_voice">
+
+        <SwitchPreferenceCompat
+            app:key="pref_dialect"
+            app:title="@string/pref_dialect_title"
+            app:summary="@string/pref_dialect_summary"
+            app:defaultValue="false"
+            app:iconSpaceReserved="false" />
+
+        <SwitchPreferenceCompat
+            app:key="pref_popular_words"
+            app:title="@string/pref_popular_words_title"
+            app:summary="@string/pref_popular_words_summary"
+            app:defaultValue="true"
+            app:iconSpaceReserved="false" />
+
+        <SwitchPreferenceCompat
+            app:key="pref_movie_words"
+            app:title="@string/pref_movie_words_title"
+            app:summary="@string/pref_movie_words_summary"
+            app:defaultValue="true"
+            app:iconSpaceReserved="false" />
+
+    </PreferenceCategory>
+
+    <!-- Dictionary Management -->
+    <PreferenceCategory app:title="@string/pref_category_dictionary">
+
+        <Preference
+            app:key="pref_update_dict"
+            app:title="@string/pref_update_dict_title"
+            app:summary="@string/pref_update_dict_summary"
+            app:iconSpaceReserved="false" />
+
+        <Preference
+            app:key="pref_dict_version"
+            app:title="@string/pref_dict_version_title"
+            app:summary="@string/pref_dict_version_summary"
+            app:iconSpaceReserved="false"
+            app:selectable="false" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
