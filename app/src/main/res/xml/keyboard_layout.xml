@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<KeyboardLayout xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- This file declares the keyboard layout structure -->
-    <!-- Actual layout is built programmatically in TvKeyboardView -->
-</KeyboardLayout>
