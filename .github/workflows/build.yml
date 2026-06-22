@@ -1,0 +1,121 @@
+# VoiceType IME - 轻语输入法
+# GitHub Actions CI/CD workflow
+# Builds release APK for arm64-v8a only
+
+name: Build VoiceType IME
+
+on:
+  push:
+    branches: [ main, master, develop ]
+    tags: [ 'v*' ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install NDK
+        run: |
+          sdkmanager --install "ndk;26.1.10909125"
+          echo "ANDROID_NDK_HOME=$ANDROID_HOME/ndk/26.1.10909125" >> $GITHUB_ENV
+
+      - name: Generate Gradle Wrapper
+        run: |
+          # If gradle-wrapper.jar is missing, generate it using the installed Gradle
+          if [ ! -f gradle/wrapper/gradle-wrapper.jar ]; then
+            echo "gradle-wrapper.jar not found, generating with Gradle..."
+            # Use the Gradle distribution directly
+            GRADLE_VERSION=8.5
+              curl -sL "https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip" -o /tmp/gradle.zip
+              unzip -q /tmp/gradle.zip -d /tmp/
+              /tmp/gradle-${GRADLE_VERSION}/bin/gradle wrapper --gradle-version ${GRADLE_VERSION}
+              chmod +x gradlew
+            echo "Gradle wrapper generated successfully"
+          else
+            echo "gradle-wrapper.jar found"
+            chmod +x gradlew
+          fi
+
+      - name: Cache Gradle packages
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: gradle-
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Build Debug APK
+        if: github.event_name == 'pull_request' || github.ref == 'refs/heads/develop'
+        run: ./gradlew assembleDebug
+
+      - name: Build Release APK
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/tags/v')
+        run: ./gradlew assembleRelease
+
+      - name: Sign Release APK
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: r0adkll/sign-android-release@v1
+        with:
+          releaseDirectory: app/build/outputs/apk/release
+          signingKeyBase64: ${{ secrets.SIGNING_KEY_BASE64 }}
+          alias: ${{ secrets.KEY_ALIAS }}
+          keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
+          keyPassword: ${{ secrets.KEY_PASSWORD }}
+        env:
+          BUILD_TOOLS_VERSION: "34.0.0"
+
+      - name: Upload Debug APK
+        if: github.event_name == 'pull_request' || github.ref == 'refs/heads/develop'
+        uses: actions/upload-artifact@v4
+        with:
+          name: voicetype-debug-${{ github.sha }}
+          path: app/build/outputs/apk/debug/*.apk
+
+      - name: Upload Release APK
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/tags/v')
+        uses: actions/upload-artifact@v4
+        with:
+          name: voicetype-release-${{ github.ref_name }}
+          path: app/build/outputs/apk/release/*.apk
+
+      - name: Create Release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v1
+        with:
+          files: app/build/outputs/apk/release/*.apk
+          body: |
+            # 轻语输入法 (VoiceType IME)
+
+            ## 安装说明
+            1. 下载 APK 文件
+            2. 在 Android TV 上安装（需要允许未知来源）
+            3. 进入 设置 → 输入法 → 启用「轻语输入法」
+            4. 切换到轻语输入法即可使用
+
+            ## 功能
+            - 🎤 语音输入：按OK键开始/结束录音
+            - ⌨️ 26键+9宫格键盘：遥控器D-Pad导航选字
+            - 🔠 流行词/影视剧名快速识别
+            - 🌐 方言识别模式（可开关）
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

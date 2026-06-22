@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">轻语输入法</string>
+    <string name="ime_name">轻语输入法</string>
+    <string name="subtype_label">中文 – 语音</string>
+    <string name="settings_title">轻语输入法设置</string>
+    <string name="voice_permission_title">语音权限</string>
+    <string name="key_voice">🎤 语音</string>
+    <string name="key_space">空格</string>
+    <string name="key_enter">确定</string>
+    <string name="key_delete">删除</string>
+    <string name="key_shift">大写</string>
+    <string name="voice_listening">正在聆听…</string>
+    <string name="voice_processing">识别中…</string>
+    <string name="voice_error">语音识别出错，请重试</string>
+    <string name="voice_no_permission">需要麦克风权限才能使用语音输入</string>
+    <string name="voice_tap_to_start">按 OK 键开始语音输入</string>
+    <string name="voice_tap_to_stop">按 OK 或返回键结束语音输入</string>
+    <string name="no_candidates">暂无候选词</string>
+    <string name="pref_category_voice">语音设置</string>
+    <string name="pref_dialect_title">方言识别</string>
+    <string name="pref_dialect_summary">开启方言识别模式</string>
+    <string name="pref_popular_words_title">流行词库</string>
+    <string name="pref_popular_words_summary">启用网络流行词识别</string>
+    <string name="pref_movie_words_title">影视剧名词库</string>
+    <string name="pref_movie_words_summary">启用影视剧名称快速识别</string>
+    <string name="pref_category_dictionary">词库管理</string>
+    <string name="pref_update_dict_title">更新词库</string>
+    <string name="pref_update_dict_summary">检查并更新流行词和影视剧名词库</string>
+</resources>

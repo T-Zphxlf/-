@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Keyboard dimensions -->
+    <dimen name="keyboard_height">280dp</dimen>
+    <dimen name="candidate_bar_height">44dp</dimen>
+    <dimen name="key_size">52dp</dimen>
+    <dimen name="key_margin">2dp</dimen>
+    <dimen name="key_text_size">18sp</dimen>
+    <dimen name="special_key_width">108dp</dimen>
+    <dimen name="voice_key_height">56dp</dimen>
+    <dimen name="num_key_size">60dp</dimen>
+    <dimen name="num_key_text_size">20sp</dimen>
+    <dimen name="keyboard_padding">8dp</dimen>
+    <dimen name="candidate_text_size">18sp</dimen>
+    <dimen name="voice_status_text_size">16sp</dimen>
+
+    <!-- Number pad section width -->
+    <dimen name="numpad_width">220dp</dimen>
+    <dimen name="alpha_section_width">680dp</dimen>
+</resources>

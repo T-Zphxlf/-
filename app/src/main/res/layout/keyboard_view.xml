@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Main keyboard view for TV input method -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/keyboard_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/keyboard_background"
+    android:padding="@dimen/keyboard_padding">
+
+    <!-- Voice status indicator -->
+    <LinearLayout
+        android:id="@+id/voice_status_bar"
+        android:layout_width="match_parent"
+        android:layout_height="28dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:visibility="gone">
+
+        <View
+            android:id="@+id/voice_status_dot"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_marginStart="8dp" />
+
+        <TextView
+            android:id="@+id/voice_status_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textSize="@dimen/voice_status_text_size"
+            android:textColor="@color/voice_key_text" />
+    </LinearLayout>
+
+    <!-- Candidate bar -->
+    <HorizontalScrollView
+        android:id="@+id/candidate_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/candidate_bar_height"
+        android:scrollbars="none"
+        android:background="@color/candidate_bar_bg">
+
+        <LinearLayout
+            android:id="@+id/candidate_container"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingStart="4dp"
+            android:paddingEnd="4dp" />
+    </HorizontalScrollView>
+
+    <!-- Main keyboard area -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="4dp">
+
+        <!-- Left: QWERTY area + voice + controls -->
+        <LinearLayout
+            android:id="@+id/alpha_section"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:orientation="vertical">
+
+            <!-- Row 1: Q W E R T Y U I O P -->
+            <LinearLayout
+                android:id="@+id/row1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center" />
+
+            <!-- Row 2: A S D F G H J K L -->
+            <LinearLayout
+                android:id="@+id/row2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center" />
+
+            <!-- Row 3: Z X C V B N M + DELETE -->
+            <LinearLayout
+                android:id="@+id/row3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center" />
+
+            <!-- Row 4: Voice key (main) + shift + space + enter -->
+            <LinearLayout
+                android:id="@+id/row4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <!-- Right: 9-grid number pad -->
+        <LinearLayout
+            android:id="@+id/numpad_section"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginStart="4dp"
+            android:gravity="center">
+
+            <!-- Numpad row 1: 1 2 3 -->
+            <LinearLayout
+                android:id="@+id/num_row1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" />
+
+            <!-- Numpad row 2: 4 5 6 -->
+            <LinearLayout
+                android:id="@+id/num_row2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" />
+
+            <!-- Numpad row 3: 7 8 9 -->
+            <LinearLayout
+                android:id="@+id/num_row3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" />
+
+            <!-- Numpad row 4: (empty) 0 (empty) -->
+            <LinearLayout
+                android:id="@+id/num_row4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
